@@ -58,7 +58,6 @@ elif tabs == "Manage Patients":
     with st.form("add_patient_form"):
         patient_name = st.text_input("Patient Name", placeholder="Enter patient name")
         patient_email = st.text_input("Patient Email", placeholder="Enter patient email")
-        
         submitted = st.form_submit_button("Add Patient")
         
         if submitted:
@@ -87,7 +86,14 @@ elif tabs == "Manage Appointments":
     with st.form("schedule_appointment_form"):
         patient_id = st.number_input("Patient ID", min_value=1, step=1, placeholder="Enter Patient ID")
         practitioner = st.text_input("Practitioner Name", placeholder="Enter practitioner name")
-        appointment_datetime = st.datetime_input("Appointment Date and Time", value=datetime.now() + datetime.timedelta(days=1))
+         # Input for date
+        appointment_date = st.date_input("Appointment Date")
+
+#         # Input for time
+        appointment_time = st.time_input("Appointment Time")
+
+#         # Combine date and time into a datetime object
+        appointment_datetime = datetime.combine(appointment_date, appointment_time)
         submitted = st.form_submit_button("Schedule Appointment")
         
         if submitted:
@@ -111,7 +117,7 @@ elif tabs == "Manage Appointments":
     appointments = session.query(Appointment).filter_by(status="Scheduled").order_by(Appointment.appointment_datetime).all()
     if appointments:
         for appt in appointments:
-            st.write(f"**ID:** {appt.id} | **Patient:** {appt.patient.name} | **Practitioner:** {appt.practitioner} | **Time:** {appt.appointment_datetime.strftime('%Y-%m-%d %H:%M')} | **Status:** {appt.status}")
+            st.write(f"**ID:** {appt.id} | **Patient:** {appt.patient.name} | **Time:** {appt.appointment_datetime.strftime('%Y-%m-%d %H:%M')} | **Status:** {appt.status}")
     else:
         st.info("No scheduled appointments found.")
 
@@ -122,12 +128,13 @@ elif tabs == "Waitlist Management":
     with st.form("add_waitlist_form"):
         patient_id = st.number_input("Patient ID", min_value=1, step=1, placeholder="Enter Patient ID")
         priority = st.slider("Priority Score", min_value=1, max_value=100, value=50)
+        requested_time = st.date_input("Preferred Date")
         submitted = st.form_submit_button("Add to Waitlist")
         
         if submitted:
             patient = session.query(Patient).filter_by(id=patient_id).first()
             if patient:
-                if add_to_waitlist(patient_id=patient_id, priority=priority):
+                if add_to_waitlist(patient_id=patient_id, urgency=priority,requested_datetime=requested_time):
                     st.success(f"Patient ID {patient_id} added to the waitlist with priority {priority}.")
                 else:
                     st.error("Failed to add patient to the waitlist. They might already be on the waitlist.")
@@ -292,3 +299,255 @@ elif tabs == "Reports":
             st.error(f"Failed to generate adherence report: {e}")
     
     st.markdown("---")
+    
+    # st.subheader("Send Adherence Report via Email")
+    # if st.button("Send Adherence Report"):
+    #     try:
+    #         send_adherence_report()
+    #         st.success("Adherence report sent successfully.")
+    #     except Exception as e:
+    #         st.error(f"Failed to send adherence report: {e}")
+
+
+# def main():
+#     # Initialize session state variables
+#     if "logged_in" not in st.session_state:
+#         st.session_state.logged_in = False
+#         st.session_state.user = None
+
+#     # Title of the app
+#     st.title("Medical Scheduler Application")
+#     start_scheduler()
+
+#     # Check if the user is logged in
+#     if not st.session_state.logged_in:
+#         email = st.text_input("Enter your email to login")
+#         if st.button("Login"):
+#             user = session.query(User).filter_by(email=email).first()
+#             if user:
+#                 st.session_state.logged_in = True
+#                 st.session_state.user = user
+#                 st.success(f"Welcome, {user.name} ({user.role})")
+#             else:
+#                 st.error("User not found")
+#     else:
+#         user = st.session_state.user
+#         st.success(f"Welcome back, {user.name} ({user.role})")
+
+#         # Provide a logout button
+#         if st.button("Logout"):
+#             st.session_state.logged_in = False
+#             st.session_state.user = None
+#             st.rerun()  
+
+#         # Handle roles
+#         if "Front Desk" in user.role:
+#             front_desk_interface(user)
+#         elif "General" in user.role:
+#             practitioner_interface(user)
+#         else:
+#             st.error("Unknown role")
+
+# def front_desk_interface(user):
+#     st.header("Appointment Scheduling")
+    
+#     # Add New Patient
+#     st.subheader("Add New Patient")
+#     patient_name = st.text_input("Patient Name")
+#     patient_email = st.text_input("Patient Email")
+#     patient_phone = st.text_input("Patient Phone Number (Optional)")
+
+#     if st.button("Add Patient"):
+#         if patient_name and patient_email:
+#             new_patient = Patient(
+#                     name=patient_name,
+#                     email=patient_email,
+#                     phone_number=patient_phone,
+#                     email_verified=True
+#                 )
+#             session.add(new_patient)
+#             session.commit()
+#             st.success("Patient added successfully with verified email.")
+#             # print(patient_email)
+#             # res = verify(str(patient_email))
+#             # if res== True:
+#             #     new_patient = Patient(
+#             #         name=patient_name,
+#             #         email=patient_email,
+#             #         phone_number=patient_phone,
+#             #         email_verified=True
+#             #     )
+#             #     session.add(new_patient)
+#             #     session.commit()
+#             #     st.success("Patient added successfully with verified email.")
+                
+#             # else:
+#             #     st.error("Invalid email address. Please provide a valid email.")
+#         else:
+#             st.error("Please provide both name and email.")
+    
+#     st.markdown("---")
+    
+#     # Schedule Appointment
+#     st.subheader("Schedule New Appointment")
+#     patients = session.query(Patient).all()
+#     if patients:
+#         patient_options = {f"{p.name} (ID: {p.id})": p.id for p in patients}
+#         patient_selection = st.selectbox("Select Patient", options=list(patient_options.keys()))
+#         # appointment_datetime = st.time_input("Appointment Date and Time", value=datetime.now())
+#         # Input for date
+#         appointment_date = st.date_input("Appointment Date")
+
+#         # Input for time
+#         appointment_time = st.time_input("Appointment Time")
+
+#         # Combine date and time into a datetime object
+#         appointment_datetime = datetime.datetime.combine(appointment_date, appointment_time)
+        
+#         if st.button("Schedule Appointment"):
+#             selected_patient_id = patient_options[patient_selection]
+#             overlapping = session.query(Appointment).filter(
+#                 Appointment.appointment_datetime == appointment_datetime,
+#                 Appointment.status == 'Scheduled'
+#             ).first()
+#             if overlapping:
+#                 st.error("This time slot is already booked.")
+#             else:
+#                 new_appointment = Appointment(
+#                     patient_id=selected_patient_id,
+#                     user_id=user.id,
+#                     appointment_datetime=appointment_datetime,
+#                     status='Scheduled'
+#                 )
+#                 session.add(new_appointment)
+#                 session.commit()
+#                 st.success("Appointment scheduled successfully.")
+                
+#                 # Add to Google Calendar
+#                 # if add_app_to_cal(new_appointment):
+#                 #     st.success("Appointment added to Google Calendar.")
+#                 # else:
+#                 #     st.warning("Failed to add appointment to Google Calendar.")
+                
+#                 # Send Reminder
+#                 if send_remainder(new_appointment):
+#                     st.success("Reminder sent to patient.")
+#                 else:
+#                     st.warning("Failed to send reminder.")
+#     else:
+#         st.info("No patients found. Please add a patient first.")
+    
+#     st.markdown("---")
+    
+#     # View Today's Appointments
+#     st.subheader("Today's Appointments")
+#     today = datetime.datetime.now().date()
+#     appointments = session.query(Appointment).join(Patient).filter(
+#         Appointment.appointment_datetime >= datetime.datetime.combine(today, datetime.datetime.min.time()),
+#         Appointment.appointment_datetime < datetime.datetime.combine(today, datetime.datetime.max.time())
+#     ).all()
+    
+#     if appointments:
+#         data = [{
+#             "Patient Name": appt.patient.name,
+#             "Appointment Time": appt.appointment_datetime.strftime("%Y-%m-%d %H:%M"),
+#             "Status": appt.status
+#         } for appt in appointments]
+#         st.table(data)
+#     else:
+#         st.info("No appointments scheduled for today.")
+    
+
+#         st.markdown("---")
+    
+#     # Section to view and manage follow-up adherence
+#     st.header("Follow-Up Adherence Management")
+#     followups = session.query(FollowUp).join(Appointment).join(Patient).filter(
+#         Appointment.appointment_datetime >= datetime.datetime.combine(today, datetime.datetime.min.time()),
+#         Appointment.appointment_datetime < datetime.datetime.combine(today, datetime.datetime.max.time()),
+#         FollowUp.status == 'Pending'
+#     ).all()
+    
+#     if followups:
+#         st.subheader("Pending Follow-Ups")
+#         for followup in followups:
+#             st.write(f"**Patient:** {followup.appointment.patient.name}")
+#             st.write(f"**Follow-Up Type:** {followup.followup_type}")
+#             st.write(f"**Due Date:** {followup.due_date.strftime('%Y-%m-%d %H:%M')}")
+#             if st.button(f"Mark as Completed - FollowUp ID {followup.id}", key=f"complete_followup_{followup.id}"):
+#                 # Update adherence
+#                 update_adherence(followup.id, completed=True)
+#                 # Update follow-up status
+#                 followup.status = 'Completed'
+#                 session.commit()
+#                 st.success(f"Follow-up ID {followup.id} marked as completed.")
+#     else:
+#         st.info("No pending follow-ups for today.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def practitioner_interface(user):
+#     st.header("Today's Schedule Summary")
+    
+#     today = datetime.datetime.now().date()
+#     appointments_all = session.query(Appointment).join(Patient).filter(
+        
+#     ).all()
+#     appointments = session.query(Appointment).join(Patient).filter(
+#         Appointment.appointment_datetime >= datetime.datetime.combine(today, datetime.datetime.min.time()),
+#         Appointment.appointment_datetime < datetime.datetime.combine(today, datetime.datetime.max.time())
+#     ).all()
+
+    
+    
+#     if appointments:
+#         data = [{
+#             "Patient Name": appt.patient.name,
+#             "Appointment Time": appt.appointment_datetime.strftime("%Y-%m-%d %H:%M"),
+#             "Status": appt.status
+#         } for appt in appointments]
+#         st.table(data)
+#     else:
+#         st.info("No appointments scheduled for today.")
+#     st.header("All Active Schedule Summary")
+
+#     data_all = [{
+#         "Patient Name": appt.patient.name,
+#         "Appointment Time": appt.appointment_datetime.strftime("%Y-%m-%d %H:%M"),
+#         "Status": appt.status
+#         } for appt in appointments_all]
+#     st.table(data_all)
+
+
+
+#     st.markdown("---")
+    
+#     # Adherence Report Section
+#     st.header("Follow-Up Adherence Report")
+#     if st.button("Generate Adherence Report"):
+#         report_df = generate_adherence_report()
+#         if report_df.empty:
+#             st.info("No adherence data available.")
+#         else:
+#             st.dataframe(report_df)
+#             # Optionally, allow downloading the report
+#             csv = report_df.to_csv(index=False)
+#             st.download_button(
+#                 label="Download Report as CSV",
+#                 data=csv,
+#                 file_name=f"adherence_report_{today.strftime('%Y%m%d')}.csv",
+#                 mime='text/csv',
+#             )
+
+# if __name__ == "__main__":
+#     main()
