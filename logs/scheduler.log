@@ -1,0 +1,585 @@
+2025-01-01 17:06:06,290 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:06,291 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:06,292 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:06,293 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:06,294 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:06,294 INFO:Added job "send_reminders" to job store "default"
+2025-01-01 17:06:06,295 INFO:Added job "generate_daily_summary" to job store "default"
+2025-01-01 17:06:06,295 INFO:Added job "monitor_cancellations" to job store "default"
+2025-01-01 17:06:06,296 INFO:Added job "send_followup_reminders" to job store "default"
+2025-01-01 17:06:06,297 INFO:Added job "send_adherence_report" to job store "default"
+2025-01-01 17:06:06,298 INFO:Scheduler started
+2025-01-01 17:06:10,939 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:10,939 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:10,940 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:10,940 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:10,943 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:10,943 INFO:Added job "send_reminders" to job store "default"
+2025-01-01 17:06:10,944 INFO:Added job "generate_daily_summary" to job store "default"
+2025-01-01 17:06:10,945 INFO:Added job "monitor_cancellations" to job store "default"
+2025-01-01 17:06:10,946 INFO:Added job "send_followup_reminders" to job store "default"
+2025-01-01 17:06:10,947 INFO:Added job "send_adherence_report" to job store "default"
+2025-01-01 17:06:10,947 INFO:Scheduler started
+2025-01-01 17:06:11,103 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:11,104 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:11,106 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:11,106 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:11,106 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:11,107 INFO:Added job "send_reminders" to job store "default"
+2025-01-01 17:06:11,107 INFO:Added job "generate_daily_summary" to job store "default"
+2025-01-01 17:06:11,107 INFO:Added job "monitor_cancellations" to job store "default"
+2025-01-01 17:06:11,107 INFO:Added job "send_followup_reminders" to job store "default"
+2025-01-01 17:06:11,108 INFO:Added job "send_adherence_report" to job store "default"
+2025-01-01 17:06:11,108 INFO:Scheduler started
+2025-01-01 17:06:11,192 INFO:BEGIN (implicit)
+2025-01-01 17:06:11,196 INFO:SELECT users.id AS users_id, users.name AS users_name, users.role AS users_role, users.email AS users_email 
+FROM users 
+WHERE users.email = ?
+ LIMIT ? OFFSET ?
+2025-01-01 17:06:11,197 INFO:[generated in 0.00050s] ('sarah.jones@example.com', 1, 0)
+2025-01-01 17:06:12,682 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:12,683 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:12,686 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:12,687 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:12,687 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:12,687 INFO:Added job "send_reminders" to job store "default"
+2025-01-01 17:06:12,688 INFO:Added job "generate_daily_summary" to job store "default"
+2025-01-01 17:06:12,688 INFO:Added job "monitor_cancellations" to job store "default"
+2025-01-01 17:06:12,688 INFO:Added job "send_followup_reminders" to job store "default"
+2025-01-01 17:06:12,688 INFO:Added job "send_adherence_report" to job store "default"
+2025-01-01 17:06:12,689 INFO:Scheduler started
+2025-01-01 17:06:12,697 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:06:12,697 INFO:[generated in 0.00062s] ()
+2025-01-01 17:06:12,712 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ?
+2025-01-01 17:06:12,713 INFO:[generated in 0.00077s] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999')
+2025-01-01 17:06:13,236 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups JOIN appointments ON appointments.id = followups.appointment_id JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ? AND followups.status = ?
+2025-01-01 17:06:13,237 INFO:[generated in 0.00192s] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999', 'Pending')
+2025-01-01 17:06:20,453 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:20,454 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:20,454 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:20,454 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:20,455 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:20,455 INFO:Added job "send_reminders" to job store "default"
+2025-01-01 17:06:20,456 INFO:Added job "generate_daily_summary" to job store "default"
+2025-01-01 17:06:20,456 INFO:Added job "monitor_cancellations" to job store "default"
+2025-01-01 17:06:20,456 INFO:Added job "send_followup_reminders" to job store "default"
+2025-01-01 17:06:20,456 INFO:Added job "send_adherence_report" to job store "default"
+2025-01-01 17:06:20,458 INFO:Scheduler started
+2025-01-01 17:06:20,465 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:06:20,465 INFO:[cached since 7.769s ago] ()
+2025-01-01 17:06:20,472 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ?
+2025-01-01 17:06:20,473 INFO:[cached since 7.761s ago] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999')
+2025-01-01 17:06:20,490 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups JOIN appointments ON appointments.id = followups.appointment_id JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ? AND followups.status = ?
+2025-01-01 17:06:20,491 INFO:[cached since 7.255s ago] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999', 'Pending')
+2025-01-01 17:06:22,525 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:22,526 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:22,526 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:22,526 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:22,527 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:22,527 INFO:Added job "send_reminders" to job store "default"
+2025-01-01 17:06:22,527 INFO:Added job "generate_daily_summary" to job store "default"
+2025-01-01 17:06:22,527 INFO:Added job "monitor_cancellations" to job store "default"
+2025-01-01 17:06:22,528 INFO:Added job "send_followup_reminders" to job store "default"
+2025-01-01 17:06:22,528 INFO:Added job "send_adherence_report" to job store "default"
+2025-01-01 17:06:22,528 INFO:Scheduler started
+2025-01-01 17:06:22,535 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:06:22,536 INFO:[cached since 9.84s ago] ()
+2025-01-01 17:06:22,543 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ?
+2025-01-01 17:06:22,547 INFO:[cached since 9.835s ago] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999')
+2025-01-01 17:06:22,557 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups JOIN appointments ON appointments.id = followups.appointment_id JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ? AND followups.status = ?
+2025-01-01 17:06:22,557 INFO:[cached since 9.322s ago] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999', 'Pending')
+2025-01-01 17:06:23,580 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:23,580 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:23,581 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:23,581 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:23,582 INFO:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-01 17:06:23,582 INFO:Added job "send_reminders" to job store "default"
+2025-01-01 17:06:23,582 INFO:Added job "generate_daily_summary" to job store "default"
+2025-01-01 17:06:23,583 INFO:Added job "monitor_cancellations" to job store "default"
+2025-01-01 17:06:23,583 INFO:Added job "send_followup_reminders" to job store "default"
+2025-01-01 17:06:23,583 INFO:Added job "send_adherence_report" to job store "default"
+2025-01-01 17:06:23,584 INFO:Scheduler started
+2025-01-01 17:06:23,591 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:06:23,591 INFO:[cached since 10.89s ago] ()
+2025-01-01 17:06:23,600 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.appointment_datetime = ? AND appointments.status = ?
+ LIMIT ? OFFSET ?
+2025-01-01 17:06:23,600 INFO:[generated in 0.00086s] ('2025-01-29 17:06:00.000000', 'Scheduled', 1, 0)
+2025-01-01 17:06:23,605 INFO:INSERT INTO appointments (patient_id, user_id, appointment_datetime, status) VALUES (?, ?, ?, ?)
+2025-01-01 17:06:23,605 INFO:[generated in 0.00049s] (1, 1, '2025-01-29 17:06:00.000000', 'Scheduled')
+2025-01-01 17:06:23,607 INFO:COMMIT
+2025-01-01 17:06:23,638 INFO:BEGIN (implicit)
+2025-01-01 17:06:23,641 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+2025-01-01 17:06:23,642 INFO:[generated in 0.00162s] (4,)
+2025-01-01 17:06:23,647 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:06:23,648 INFO:[generated in 0.00056s] (1,)
+2025-01-01 17:06:28,120 INFO:INSERT INTO reminders (appointment_id, sent) VALUES (?, ?)
+2025-01-01 17:06:28,120 INFO:[generated in 0.00088s] (4, '2025-01-01 17:06:28.116746')
+2025-01-01 17:06:28,121 INFO:COMMIT
+2025-01-01 17:06:28,130 INFO:BEGIN (implicit)
+2025-01-01 17:06:28,131 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ?
+2025-01-01 17:06:28,132 INFO:[cached since 15.42s ago] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999')
+2025-01-01 17:06:28,134 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:06:28,135 INFO:[cached since 4.488s ago] (1,)
+2025-01-01 17:06:28,142 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups JOIN appointments ON appointments.id = followups.appointment_id JOIN patients ON patients.id = appointments.patient_id 
+WHERE appointments.appointment_datetime >= ? AND appointments.appointment_datetime < ? AND followups.status = ?
+2025-01-01 17:06:28,143 INFO:[cached since 14.91s ago] ('2025-01-01 00:00:00.000000', '2025-01-01 23:59:59.999999', 'Pending')
+2025-01-01 17:16:06,296 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:16:06 EAT)" (scheduled at 2025-01-01 17:16:06.292245+03:00)
+2025-01-01 17:16:06,296 INFO:Starting monitor_cancellations job.
+2025-01-01 17:16:06,302 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:16:06,305 INFO:[generated in 0.00313s] ('Cancelled',)
+2025-01-01 17:16:06,310 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:16:06,314 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:26:06 EAT)" executed successfully
+2025-01-01 17:16:10,940 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:16:10 EAT)" (scheduled at 2025-01-01 17:16:10.939962+03:00)
+2025-01-01 17:16:10,943 INFO:Starting monitor_cancellations job.
+2025-01-01 17:16:10,945 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:16:10,946 INFO:[cached since 4.644s ago] ('Cancelled',)
+2025-01-01 17:16:10,947 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:16:10,947 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:26:10 EAT)" executed successfully
+2025-01-01 17:16:11,107 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:16:11 EAT)" (scheduled at 2025-01-01 17:16:11.105971+03:00)
+2025-01-01 17:16:11,108 INFO:Starting monitor_cancellations job.
+2025-01-01 17:16:11,109 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:16:11,110 INFO:[cached since 4.808s ago] ('Cancelled',)
+2025-01-01 17:16:11,111 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:16:11,111 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:26:11 EAT)" executed successfully
+2025-01-01 17:16:12,687 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:16:12 EAT)" (scheduled at 2025-01-01 17:16:12.686130+03:00)
+2025-01-01 17:16:12,688 INFO:Starting monitor_cancellations job.
+2025-01-01 17:16:12,689 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:16:12,689 INFO:[cached since 6.388s ago] ('Cancelled',)
+2025-01-01 17:16:12,690 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:16:12,691 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:26:12 EAT)" executed successfully
+2025-01-01 17:16:20,455 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:16:20 EAT)" (scheduled at 2025-01-01 17:16:20.454136+03:00)
+2025-01-01 17:16:20,455 INFO:Starting monitor_cancellations job.
+2025-01-01 17:16:20,457 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:16:20,457 INFO:[cached since 14.16s ago] ('Cancelled',)
+2025-01-01 17:16:20,458 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:16:20,458 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:26:20 EAT)" executed successfully
+2025-01-01 17:16:22,531 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:16:22 EAT)" (scheduled at 2025-01-01 17:16:22.526129+03:00)
+2025-01-01 17:16:22,532 INFO:Starting monitor_cancellations job.
+2025-01-01 17:16:22,537 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:16:22,538 INFO:[cached since 16.24s ago] ('Cancelled',)
+2025-01-01 17:16:22,544 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:16:22,544 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:26:22 EAT)" executed successfully
+2025-01-01 17:16:23,582 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:16:23 EAT)" (scheduled at 2025-01-01 17:16:23.580961+03:00)
+2025-01-01 17:16:23,583 INFO:Starting monitor_cancellations job.
+2025-01-01 17:16:23,587 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:16:23,592 INFO:[cached since 17.29s ago] ('Cancelled',)
+2025-01-01 17:16:23,597 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:16:23,603 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:26:23 EAT)" executed successfully
+2025-01-01 17:18:43,349 INFO:BEGIN (implicit)
+2025-01-01 17:18:43,370 INFO:SELECT count(*) AS count_1 
+FROM (SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients) AS anon_1
+2025-01-01 17:18:43,370 INFO:[generated in 0.00051s] ()
+2025-01-01 17:18:43,408 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments) AS anon_1
+2025-01-01 17:18:43,408 INFO:[generated in 0.00094s] ()
+2025-01-01 17:18:43,444 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?) AS anon_1
+2025-01-01 17:18:43,444 INFO:[generated in 0.00060s] ('Cancelled',)
+2025-01-01 17:18:43,470 INFO:SELECT count(*) AS count_1 
+FROM (SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist) AS anon_1
+2025-01-01 17:18:43,473 INFO:[generated in 0.00292s] ()
+2025-01-01 17:18:43,501 INFO:SELECT count(*) AS count_1 
+FROM (SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?) AS anon_1
+2025-01-01 17:18:43,504 INFO:[generated in 0.00343s] ('Pending',)
+2025-01-01 17:18:43,539 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments ORDER BY appointments.appointment_datetime DESC
+ LIMIT ? OFFSET ?
+2025-01-01 17:18:43,540 INFO:[generated in 0.00113s] (5, 0)
+2025-01-01 17:18:43,546 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:18:43,547 INFO:[generated in 0.00064s] (1,)
+2025-01-01 17:18:49,555 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:18:49,556 INFO:[generated in 0.00070s] ('Cancelled',)
+2025-01-01 17:18:54,329 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:18:54,329 INFO:[cached since 4.774s ago] ('Cancelled',)
+2025-01-01 17:18:54,338 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+ LIMIT ? OFFSET ?
+2025-01-01 17:18:54,342 INFO:[generated in 0.00425s] (1, 1, 0)
+2025-01-01 17:18:54,349 INFO:UPDATE appointments SET status=? WHERE appointments.id = ?
+2025-01-01 17:18:54,351 INFO:[generated in 0.00192s] ('Cancelled', 1)
+2025-01-01 17:18:54,356 INFO:COMMIT
+2025-01-01 17:18:57,027 INFO:BEGIN (implicit)
+2025-01-01 17:18:57,028 INFO:SELECT count(*) AS count_1 
+FROM (SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients) AS anon_1
+2025-01-01 17:18:57,029 INFO:[cached since 13.66s ago] ()
+2025-01-01 17:18:57,033 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments) AS anon_1
+2025-01-01 17:18:57,033 INFO:[cached since 13.63s ago] ()
+2025-01-01 17:18:57,035 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?) AS anon_1
+2025-01-01 17:18:57,035 INFO:[cached since 13.59s ago] ('Cancelled',)
+2025-01-01 17:18:57,037 INFO:SELECT count(*) AS count_1 
+FROM (SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist) AS anon_1
+2025-01-01 17:18:57,038 INFO:[cached since 13.57s ago] ()
+2025-01-01 17:18:57,039 INFO:SELECT count(*) AS count_1 
+FROM (SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?) AS anon_1
+2025-01-01 17:18:57,040 INFO:[cached since 13.54s ago] ('Pending',)
+2025-01-01 17:18:57,048 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments ORDER BY appointments.appointment_datetime DESC
+ LIMIT ? OFFSET ?
+2025-01-01 17:18:57,048 INFO:[cached since 13.51s ago] (5, 0)
+2025-01-01 17:18:57,050 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:18:57,050 INFO:[cached since 13.5s ago] (1,)
+2025-01-01 17:19:04,047 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?
+2025-01-01 17:19:04,048 INFO:[generated in 0.00060s] ('Pending',)
+2025-01-01 17:19:29,681 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+ LIMIT ? OFFSET ?
+2025-01-01 17:19:29,682 INFO:[cached since 35.34s ago] (1, 1, 0)
+2025-01-01 17:19:29,686 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?
+2025-01-01 17:19:29,687 INFO:[cached since 25.64s ago] ('Pending',)
+2025-01-01 17:19:34,325 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+ LIMIT ? OFFSET ?
+2025-01-01 17:19:34,326 INFO:[cached since 39.99s ago] (2, 1, 0)
+2025-01-01 17:19:34,331 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?
+2025-01-01 17:19:34,333 INFO:[cached since 30.29s ago] ('Pending',)
+2025-01-01 17:20:58,729 INFO:SELECT count(*) AS count_1 
+FROM (SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients) AS anon_1
+2025-01-01 17:20:58,731 INFO:[cached since 135.4s ago] ()
+2025-01-01 17:20:58,734 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments) AS anon_1
+2025-01-01 17:20:58,734 INFO:[cached since 135.3s ago] ()
+2025-01-01 17:20:58,736 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?) AS anon_1
+2025-01-01 17:20:58,737 INFO:[cached since 135.3s ago] ('Cancelled',)
+2025-01-01 17:20:58,739 INFO:SELECT count(*) AS count_1 
+FROM (SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist) AS anon_1
+2025-01-01 17:20:58,739 INFO:[cached since 135.3s ago] ()
+2025-01-01 17:20:58,741 INFO:SELECT count(*) AS count_1 
+FROM (SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?) AS anon_1
+2025-01-01 17:20:58,741 INFO:[cached since 135.2s ago] ('Pending',)
+2025-01-01 17:20:58,750 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments ORDER BY appointments.appointment_datetime DESC
+ LIMIT ? OFFSET ?
+2025-01-01 17:20:58,750 INFO:[cached since 135.2s ago] (5, 0)
+2025-01-01 17:20:58,754 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:20:58,755 INFO:[cached since 135.2s ago] (1,)
+2025-01-01 17:21:10,740 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:21:10,741 INFO:[generated in 0.00108s] ()
+2025-01-01 17:21:35,927 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:21:35,929 INFO:[cached since 166.4s ago] ('Cancelled',)
+2025-01-01 17:21:35,933 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:21:35,934 INFO:[cached since 172.4s ago] (1,)
+2025-01-01 17:21:40,057 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:21:40,058 INFO:[cached since 170.5s ago] ('Cancelled',)
+2025-01-01 17:21:40,065 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:21:40,065 INFO:[cached since 176.5s ago] (1,)
+2025-01-01 17:21:40,069 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+ LIMIT ? OFFSET ?
+2025-01-01 17:21:40,069 INFO:[cached since 165.7s ago] (1, 1, 0)
+2025-01-01 17:21:40,073 INFO:COMMIT
+2025-01-01 17:21:40,076 INFO:BEGIN (implicit)
+2025-01-01 17:21:40,079 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+2025-01-01 17:21:40,080 INFO:[generated in 0.00083s] (1,)
+2025-01-01 17:21:40,084 INFO:SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist 
+WHERE waitlist.requested_datetime = ? ORDER BY waitlist.priority ASC, waitlist.added_at ASC
+ LIMIT ? OFFSET ?
+2025-01-01 17:21:40,085 INFO:[generated in 0.00093s] ('2025-01-01 16:16:00.000000', 1, 0)
+2025-01-01 17:21:42,812 INFO:SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?
+2025-01-01 17:21:42,813 INFO:[cached since 158.8s ago] ('Pending',)
+2025-01-01 17:21:48,446 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:21:48,447 INFO:[cached since 37.71s ago] ()
+2025-01-01 17:21:50,557 INFO:SELECT count(*) AS count_1 
+FROM (SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients) AS anon_1
+2025-01-01 17:21:50,558 INFO:[cached since 187.2s ago] ()
+2025-01-01 17:21:50,562 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments) AS anon_1
+2025-01-01 17:21:50,562 INFO:[cached since 187.2s ago] ()
+2025-01-01 17:21:50,564 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?) AS anon_1
+2025-01-01 17:21:50,564 INFO:[cached since 187.1s ago] ('Cancelled',)
+2025-01-01 17:21:50,566 INFO:SELECT count(*) AS count_1 
+FROM (SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist) AS anon_1
+2025-01-01 17:21:50,566 INFO:[cached since 187.1s ago] ()
+2025-01-01 17:21:50,568 INFO:SELECT count(*) AS count_1 
+FROM (SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?) AS anon_1
+2025-01-01 17:21:50,568 INFO:[cached since 187.1s ago] ('Pending',)
+2025-01-01 17:21:50,574 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments ORDER BY appointments.appointment_datetime DESC
+ LIMIT ? OFFSET ?
+2025-01-01 17:21:50,575 INFO:[cached since 187s ago] (5, 0)
+2025-01-01 17:21:55,312 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:21:55,313 INFO:[cached since 44.57s ago] ()
+2025-01-01 17:23:41,748 INFO:BEGIN (implicit)
+2025-01-01 17:23:41,752 INFO:SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist ORDER BY waitlist.priority DESC, waitlist.added_at
+2025-01-01 17:23:41,755 INFO:[generated in 0.00319s] ()
+2025-01-01 17:23:56,634 INFO:SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist ORDER BY waitlist.priority DESC, waitlist.added_at
+2025-01-01 17:23:56,635 INFO:[cached since 14.88s ago] ()
+2025-01-01 17:24:03,788 INFO:SELECT count(*) AS count_1 
+FROM (SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients) AS anon_1
+2025-01-01 17:24:03,789 INFO:[generated in 0.00115s] ()
+2025-01-01 17:24:03,796 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments) AS anon_1
+2025-01-01 17:24:03,797 INFO:[generated in 0.00060s] ()
+2025-01-01 17:24:03,804 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?) AS anon_1
+2025-01-01 17:24:03,805 INFO:[generated in 0.00054s] ('Cancelled',)
+2025-01-01 17:24:03,809 INFO:SELECT count(*) AS count_1 
+FROM (SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist) AS anon_1
+2025-01-01 17:24:03,810 INFO:[generated in 0.00057s] ()
+2025-01-01 17:24:03,817 INFO:SELECT count(*) AS count_1 
+FROM (SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?) AS anon_1
+2025-01-01 17:24:03,818 INFO:[generated in 0.00070s] ('Pending',)
+2025-01-01 17:24:03,828 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments ORDER BY appointments.appointment_datetime DESC
+ LIMIT ? OFFSET ?
+2025-01-01 17:24:03,830 INFO:[generated in 0.00129s] (5, 0)
+2025-01-01 17:24:03,833 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:24:03,833 INFO:[generated in 0.00066s] (1,)
+2025-01-01 17:24:06,258 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:24:06,259 INFO:[generated in 0.00098s] ()
+2025-01-01 17:24:34,337 INFO:BEGIN (implicit)
+2025-01-01 17:24:34,340 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:24:34,340 INFO:[generated in 0.00102s] ()
+2025-01-01 17:24:54,542 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:24:54,543 INFO:[cached since 20.2s ago] ()
+2025-01-01 17:26:06,292 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:06 EAT)" (scheduled at 2025-01-01 17:26:06.292245+03:00)
+2025-01-01 17:26:06,293 INFO:Starting monitor_cancellations job.
+2025-01-01 17:26:06,294 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:26:06,294 INFO:[cached since 600s ago] ('Cancelled',)
+2025-01-01 17:26:06,295 INFO:Found 1 canceled appointments to process.
+2025-01-01 17:26:06,301 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+ LIMIT ? OFFSET ?
+2025-01-01 17:26:06,302 INFO:[generated in 0.00218s] (1, 1, 0)
+2025-01-01 17:26:06,305 INFO:COMMIT
+2025-01-01 17:26:06,306 INFO:BEGIN (implicit)
+2025-01-01 17:26:06,307 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+2025-01-01 17:26:06,309 INFO:[cached since 1183s ago] (1,)
+2025-01-01 17:26:06,314 INFO:SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist 
+WHERE waitlist.requested_datetime = ? ORDER BY waitlist.priority ASC, waitlist.added_at ASC
+ LIMIT ? OFFSET ?
+2025-01-01 17:26:06,314 INFO:[generated in 0.00051s] ('2025-01-01 16:16:00.000000', 1, 0)
+2025-01-01 17:26:06,317 INFO:UPDATE appointments SET status=? WHERE appointments.id = ?
+2025-01-01 17:26:06,317 INFO:[generated in 0.00042s] ('Processed', 1)
+2025-01-01 17:26:06,319 INFO:COMMIT
+2025-01-01 17:26:06,362 INFO:BEGIN (implicit)
+2025-01-01 17:26:06,363 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.id = ?
+2025-01-01 17:26:06,364 INFO:[cached since 1183s ago] (1,)
+2025-01-01 17:26:06,365 INFO:Processed cancellation for appointment ID 1.
+2025-01-01 17:26:06,365 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:06 EAT)" executed successfully
+2025-01-01 17:26:10,942 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:10 EAT)" (scheduled at 2025-01-01 17:26:10.939962+03:00)
+2025-01-01 17:26:10,942 INFO:Starting monitor_cancellations job.
+2025-01-01 17:26:10,944 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:26:10,944 INFO:[cached since 604.6s ago] ('Cancelled',)
+2025-01-01 17:26:10,946 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:26:10,946 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:10 EAT)" executed successfully
+2025-01-01 17:26:11,106 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:11 EAT)" (scheduled at 2025-01-01 17:26:11.105971+03:00)
+2025-01-01 17:26:11,107 INFO:Starting monitor_cancellations job.
+2025-01-01 17:26:11,108 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:26:11,108 INFO:[cached since 604.8s ago] ('Cancelled',)
+2025-01-01 17:26:11,109 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:26:11,110 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:11 EAT)" executed successfully
+2025-01-01 17:26:12,686 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:12 EAT)" (scheduled at 2025-01-01 17:26:12.686130+03:00)
+2025-01-01 17:26:12,686 INFO:Starting monitor_cancellations job.
+2025-01-01 17:26:12,688 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:26:12,688 INFO:[cached since 606.4s ago] ('Cancelled',)
+2025-01-01 17:26:12,689 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:26:12,689 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:12 EAT)" executed successfully
+2025-01-01 17:26:20,456 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:20 EAT)" (scheduled at 2025-01-01 17:26:20.454136+03:00)
+2025-01-01 17:26:20,457 INFO:Starting monitor_cancellations job.
+2025-01-01 17:26:20,458 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:26:20,458 INFO:[cached since 614.2s ago] ('Cancelled',)
+2025-01-01 17:26:20,463 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:26:20,463 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:20 EAT)" executed successfully
+2025-01-01 17:26:22,527 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:22 EAT)" (scheduled at 2025-01-01 17:26:22.526129+03:00)
+2025-01-01 17:26:22,527 INFO:Starting monitor_cancellations job.
+2025-01-01 17:26:22,529 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:26:22,529 INFO:[cached since 616.2s ago] ('Cancelled',)
+2025-01-01 17:26:22,530 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:26:22,531 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:22 EAT)" executed successfully
+2025-01-01 17:26:23,581 INFO:Running job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:23 EAT)" (scheduled at 2025-01-01 17:26:23.580961+03:00)
+2025-01-01 17:26:23,581 INFO:Starting monitor_cancellations job.
+2025-01-01 17:26:23,582 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?
+2025-01-01 17:26:23,583 INFO:[cached since 617.3s ago] ('Cancelled',)
+2025-01-01 17:26:23,583 INFO:Found 0 canceled appointments to process.
+2025-01-01 17:26:23,583 INFO:Job "monitor_cancellations (trigger: interval[0:10:00], next run at: 2025-01-01 17:36:23 EAT)" executed successfully
+2025-01-01 17:26:24,843 INFO:BEGIN (implicit)
+2025-01-01 17:26:24,847 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:26:24,847 INFO:[generated in 0.00055s] ()
+2025-01-01 17:26:27,858 INFO:INSERT INTO patients (name, email, phone_number, email_verified) VALUES (?, ?, ?, ?)
+2025-01-01 17:26:27,858 INFO:[generated in 0.00051s] ('Nat', 'natywonde@gmail.com', None, 0)
+2025-01-01 17:26:27,861 INFO:COMMIT
+2025-01-01 17:26:27,890 INFO:BEGIN (implicit)
+2025-01-01 17:26:27,891 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:26:27,892 INFO:[generated in 0.00123s] (2,)
+2025-01-01 17:26:27,895 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:26:27,897 INFO:[cached since 3.05s ago] ()
+2025-01-01 17:26:31,491 INFO:SELECT count(*) AS count_1 
+FROM (SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients) AS anon_1
+2025-01-01 17:26:31,492 INFO:[generated in 0.00100s] ()
+2025-01-01 17:26:31,500 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments) AS anon_1
+2025-01-01 17:26:31,501 INFO:[generated in 0.00056s] ()
+2025-01-01 17:26:31,506 INFO:SELECT count(*) AS count_1 
+FROM (SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments 
+WHERE appointments.status = ?) AS anon_1
+2025-01-01 17:26:31,506 INFO:[generated in 0.00069s] ('Cancelled',)
+2025-01-01 17:26:31,514 INFO:SELECT count(*) AS count_1 
+FROM (SELECT waitlist.id AS waitlist_id, waitlist.patient_id AS waitlist_patient_id, waitlist.requested_datetime AS waitlist_requested_datetime, waitlist.added_at AS waitlist_added_at, waitlist.priority AS waitlist_priority 
+FROM waitlist) AS anon_1
+2025-01-01 17:26:31,514 INFO:[generated in 0.00048s] ()
+2025-01-01 17:26:31,520 INFO:SELECT count(*) AS count_1 
+FROM (SELECT followups.id AS followups_id, followups.appointment_id AS followups_appointment_id, followups.followup_type AS followups_followup_type, followups.due_date AS followups_due_date, followups.status AS followups_status 
+FROM followups 
+WHERE followups.status = ?) AS anon_1
+2025-01-01 17:26:31,520 INFO:[generated in 0.00045s] ('Pending',)
+2025-01-01 17:26:31,529 INFO:SELECT appointments.id AS appointments_id, appointments.patient_id AS appointments_patient_id, appointments.user_id AS appointments_user_id, appointments.appointment_datetime AS appointments_appointment_datetime, appointments.status AS appointments_status 
+FROM appointments ORDER BY appointments.appointment_datetime DESC
+ LIMIT ? OFFSET ?
+2025-01-01 17:26:31,530 INFO:[generated in 0.00100s] (5, 0)
+2025-01-01 17:26:31,536 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients 
+WHERE patients.id = ?
+2025-01-01 17:26:31,536 INFO:[generated in 0.00066s] (1,)
+2025-01-01 17:26:35,502 INFO:SELECT patients.id AS patients_id, patients.name AS patients_name, patients.email AS patients_email, patients.phone_number AS patients_phone_number, patients.email_verified AS patients_email_verified 
+FROM patients
+2025-01-01 17:26:35,502 INFO:[cached since 10.66s ago] ()

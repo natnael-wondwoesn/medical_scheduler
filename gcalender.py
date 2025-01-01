@@ -1,23 +1,25 @@
 import os
-import datetime
 import pickle
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
+import datetime
+from models import User
 from database import session
-from models import Appointment,User
-from dotenv import load_dotenv
 
-load_dotenv()
-
+# Define the scope for Google Calendar API
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-def get_calendar_ser():
-    cred = None
+
+def get_calendar_service():
+    creds = None
+
+    # Check if token.pickle file exists
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)
 
+    # If there are no valid credentials, initiate the OAuth flow
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
@@ -25,18 +27,25 @@ def get_calendar_ser():
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
-
+        
+        # Save the credentials to token.pickle
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
-    service = build('calendar', 'v3', credentials=creds)
-    return service
+            print("token.pickle created successfully!")
+
+    service_new = build('calendar', 'v3', credentials=creds)
+
+    return service_new
+
+# Test the function
 
 
 
 #######################################
 
 def add_app_to_cal(appointment):
-    service = get_calendar_ser()
+    service = get_calendar_service()
+    
     user = session.query(User).filter_by(id=appointment.user_id).first()
     if not user:
         print("Doctor not found for appointment")
